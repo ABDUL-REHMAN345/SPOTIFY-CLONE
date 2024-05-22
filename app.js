@@ -13,10 +13,14 @@ let wave = document.getElementById("wave");
 let poster_master_play = document.getElementById("poster_master_play");
 let title = document.getElementById("title");
 
+
 // Volume Change Functionality
+let vol_icon = document.getElementById("vol_icon");
+let vol = document.getElementById("vol");
+let vol_bar = document.getElementsByClassName("vol_bar")[0];
+let vol_dot = document.getElementById("vol_dot");
 
-
-// Seek Bar Functionality
+// Seek dot Functionality
 let seek = document.getElementById("seek");
 let bar2 = document.getElementById("bar2");
 let dot = document.getElementsByClassName("dot")[0];
@@ -383,8 +387,35 @@ music.addEventListener("timeupdate", () => {
   dot.style.left = `${seekbar}%`;
 });
 
-
 // Change Seek Bar According to click Functionality
-seek.addEventListener('change', ()=>{
-music.currentTime = seek.value * music.duration / 100;
+seek.addEventListener("change", () => {
+  music.currentTime = (seek.value * music.duration) / 100;
+});
+
+
+// volume Button Functionality
+
+vol.addEventListener("change", () => {
+  if (vol.value == 0) {
+    vol_icon.classList.remove("bi-volume-up-fill");
+    vol_icon.classList.remove("bi-volume-down-fill");
+    vol_icon.classList.add("bi-volume-off-fill");
+  }
+  if (vol.value > 0) {
+    vol_icon.classList.remove("bi-volume-up-fill");
+    vol_icon.classList.add("bi-volume-down-fill");
+    vol_icon.classList.remove("bi-volume-off-fill");
+  }
+  if (vol.value > 50) {
+    vol_icon.classList.add("bi-volume-up-fill");
+    vol_icon.classList.remove("bi-volume-down-fill");
+    vol_icon.classList.remove("bi-volume-off-fill");
+  }
+
+// Volume Functionality Add
+
+  let vol_a = vol.value;
+  vol_bar.style.width = `${vol_a}%`;
+  vol_dot.style.left = `${vol_a}%`;
+  music.volume = vol_a / 100;
 });
