@@ -13,6 +13,14 @@ let wave = document.getElementById("wave");
 let poster_master_play = document.getElementById("poster_master_play");
 let title = document.getElementById("title");
 
+// Volume Change Functionality
+
+
+// Seek Bar Functionality
+let seek = document.getElementById("seek");
+let bar2 = document.getElementById("bar2");
+let dot = document.getElementsByClassName("dot")[0];
+
 // Add Start And End Time Seakbar Functionality
 let currentStart = document.getElementById("currentStart");
 let currentEnd = document.getElementById("currentEnd");
@@ -331,7 +339,6 @@ Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
 
 // Add Start And End Time Seakbar Functionality
 music.addEventListener("timeupdate", () => {
-  
   let music_curr = music.currentTime;
   let music_dur = music.duration;
 
@@ -364,4 +371,20 @@ music.addEventListener("timeupdate", () => {
 
   // Current & End Time Setting
   currentStart.innerText = `${min2}:${sec2}`;
+
+  //Add Seek Bar Functionality
+
+  let progressBar = parseInt((music_curr / music_dur) * 100);
+  seek.value = progressBar;
+  // console.log(seek.value);
+
+  let seekbar = seek.value;
+  bar2.style.width = `${seekbar}%`;
+  dot.style.left = `${seekbar}%`;
+});
+
+
+// Change Seek Bar According to click Functionality
+seek.addEventListener('change', ()=>{
+music.currentTime = seek.value * music.duration / 100;
 });
