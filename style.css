@@ -529,6 +529,7 @@ header .song_side nav .user {
     height: 30px;
     /* border: 1px solid #fff; */
     border-radius: 50%;
+    cursor: pointer;
 }
 
 header .song_side nav img {
@@ -648,6 +649,7 @@ header .song_side .popular_song .pop_song li .img_play {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 header .song_side .popular_song .pop_song li .img_play img {
@@ -719,23 +721,24 @@ header .song_side .popular_artists .item {
     overflow: auto;
     scroll-behavior: smooth;
 }
+
 header .song_side .popular_artists .item::-webkit-scrollbar {
     display: none;
 }
 
 
 
-header .song_side .popular_artists .item li{
-  list-style-type: none;
-  position: relative;
-  min-width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 20px;
-  cursor: pointer;
+header .song_side .popular_artists .item li {
+    list-style-type: none;
+    position: relative;
+    min-width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
-header .song_side .popular_artists .item li img{
+header .song_side .popular_artists .item li img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
