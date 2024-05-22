@@ -10,6 +10,28 @@ let pop_song_right = document.getElementById("pop_song_right");
 let pop_song = document.getElementsByClassName("pop_song")[0];
 let masterPlay = document.getElementById("masterPlay");
 let wave = document.getElementById("wave");
+let poster_master_play = document.getElementById("poster_master_play");
+let title = document.getElementById("title");
+
+// Add Start And End Time Seakbar Functionality
+let currentStart = document.getElementById("currentStart");
+let currentEnd = document.getElementById("currentEnd");
+
+// Background Song Hover Functionality Add
+const makeAllBackground = () => {
+  Array.from(document.getElementsByClassName("songItem")).forEach((el) => {
+    el.style.background = `rgb(105 , 105 , 105 , .0)`;
+  });
+};
+
+// PlayList Play Button Functionality
+const makeAllPlays = () => {
+  Array.from(document.getElementsByClassName("playListPlay")).forEach((el) => {
+    el.classList.add("bi-play-circle-fill");
+    el.classList.remove("bi-pause-circle-fill");
+  });
+};
+
 let index = 0;
 
 const songs = [
@@ -221,7 +243,7 @@ const songs = [
     songName: `
         Mikki Na Akho <br />
         <div class="subtitle">Ussi Akho</div>`,
-    poster: "img/26.jpg",
+    poster: "img/20.jpg",
   },
 ];
 
@@ -267,11 +289,79 @@ masterPlay.addEventListener("click", () => {
   }
 });
 
-// Playlist Functionality Add
+// Playlist & PosterFunctionality Add
 
 Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
   e.addEventListener("click", (el) => {
-    let abc = el.target.id;
-    console.log(abc);
+    index = el.target.id;
+    // console.log(index);
+    music.src = `audio/${index}.mp3`;
+    poster_master_play.src = `img/${index}.jpg`;
+    music.play();
+    masterPlay.classList.remove("bi-play-fill");
+    masterPlay.classList.add("bi-pause-fill");
+
+    //  Title Fetching
+
+    let songTitles = songs.filter((els) => {
+      return els.id == index;
+    });
+
+    // Song Title Fetching Functionality
+
+    songTitles.forEach((elss) => {
+      // let { songName , poster } = elss;
+      let { songName } = elss;
+
+      title.innerHTML = songName;
+      // poster_master_play.src = poster;
+    });
+
+    // Background Functionality
+    makeAllBackground();
+    Array.from(document.getElementsByClassName("songItem"))[
+      index - 1
+    ].style.background = "rgb(105 , 105 , 105 , .1)";
+    makeAllPlays();
+    el.target.classList.remove("bi-play-circle-fill");
+    el.target.classList.add("bi-pause-circle-fill");
+    wave.classList.add("active1");
   });
+});
+
+// Add Start And End Time Seakbar Functionality
+music.addEventListener("timeupdate", () => {
+  
+  let music_curr = music.currentTime;
+  let music_dur = music.duration;
+
+  // console.log(music_curr);
+  // console.log(music_dur);
+
+  // Math.floor() mean point ka agey walli value ni chahian
+  // Current & End Time Setting
+
+  let min1 = Math.floor(music_dur / 60); /**{Min Value} */
+  let sec1 = Math.floor(music_dur % 60); /**{Sec Value} */
+
+  // console.log(min1);
+  // console.log(sec1);
+
+  if (sec1 < 10) {
+    sec1 = `0${sec1}`;
+  }
+
+  // Current & End Time Setting
+  currentEnd.innerText = `${min1}:${sec1}`;
+
+  // Current & End Time Setting
+  let min2 = Math.floor(music_curr / 60);
+  let sec2 = Math.floor(music_curr % 60);
+
+  if (sec2 < 10) {
+    sec2 = `0${sec2}`;
+  }
+
+  // Current & End Time Setting
+  currentStart.innerText = `${min2}:${sec2}`;
 });
