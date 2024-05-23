@@ -1,3 +1,5 @@
+<!-- PHP CODE -->
+
 <?php
 session_start();
 
