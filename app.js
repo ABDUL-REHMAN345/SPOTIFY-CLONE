@@ -11,6 +11,7 @@ let pop_song = document.getElementsByClassName("pop_song")[0];
 let masterPlay = document.getElementById("masterPlay");
 let wave = document.getElementById("wave");
 let poster_master_play = document.getElementById("poster_master_play");
+const posterMasterPlay = document.getElementById("poster_master_play");
 let title = document.getElementById("title");
 let download_music = document.getElementById("download_music");
 let shuffle = document.getElementsByClassName("shuffle")[0];
@@ -317,51 +318,140 @@ masterPlay.addEventListener("click", () => {
   }
 });
 
-// Playlist & PosterFunctionality Add
-
-Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
-  e.addEventListener("click", (el) => {
-    index = el.target.id;
-    // console.log(index);
-    music.src = `audio/${index}.mp3`;
-    poster_master_play.src = `img/${index}.jpg`;
-    music.play();
+// Function to update play/pause UI
+function updatePlayPauseUI(isPlaying) {
+  if (isPlaying) {
+    wave.classList.add("active1");
     masterPlay.classList.remove("bi-play-fill");
     masterPlay.classList.add("bi-pause-fill");
+  } else {
+    wave.classList.remove("active1");
+    masterPlay.classList.add("bi-play-fill");
+    masterPlay.classList.remove("bi-pause-fill");
+  }
+}
 
-    // Download Song Functionality
-    download_music.href = `audio/${index}.mp3`;
 
-    //  Title Fetching
 
-    let songTitles = songs.filter((els) => {
-      return els.id == index;
+// Playlist & PosterFunctionality Add
+
+// Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
+//   e.addEventListener("click", (el) => {
+//     index = el.target.id;
+//     // console.log(index);
+//     music.src = `audio/${index}.mp3`;
+//     poster_master_play.src = `img/${index}.jpg`;
+//     music.play();
+//     masterPlay.classList.remove("bi-play-fill");
+//     masterPlay.classList.add("bi-pause-fill");
+
+//     // Download Song Functionality
+//     download_music.href = `audio/${index}.mp3`;
+
+//     //  Title Fetching
+
+//     let songTitles = songs.filter((els) => {
+//       return els.id == index;
+//     });
+
+//     // Song Title Fetching Functionality
+
+//     songTitles.forEach((elss) => {
+//       // let { songName , poster } = elss;
+//       let { songName } = elss;
+
+//       title.innerHTML = songName;
+//       // poster_master_play.src = poster;
+
+//       // Download Song Functionality
+//       download_music.setAttribute("download", songName);
+//     });
+
+//     // Background Functionality
+//     makeAllBackground();
+//     Array.from(document.getElementsByClassName("songItem"))[
+//       index - 1
+//     ].style.background = "rgb(105 , 105 , 105 , .1)";
+//     makeAllPlays();
+//     el.target.classList.remove("bi-play-circle-fill");
+//     el.target.classList.add("bi-pause-circle-fill");
+//     wave.classList.add("active1");
+//   });
+// });
+
+
+
+
+
+
+// // Playlist & Poster Functionality
+Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
+  e.addEventListener("click", (el) => {
+    let index = el.target.id;
+    music.src = `audio/${index}.mp3`;
+    posterMasterPlay.src = `img/${index}.jpg`;
+
+    // Update UI to show the correct play/pause state
+    music.play();
+    updatePlayPauseUI(true);
+
+    // Ensure only the clicked playlist button shows the correct state
+    Array.from(document.getElementsByClassName("playListPlay")).forEach((btn) => {
+      if (btn === el.target) {
+        btn.classList.remove("bi-play-circle-fill");
+        btn.classList.add("bi-pause-circle-fill");
+      } else {
+        btn.classList.remove("bi-pause-circle-fill");
+        btn.classList.add("bi-play-circle-fill");
+      }
+
+ // Download Song Functionality
+ download_music.href = `audio/${index}.mp3`;
+
+ //  Title Fetching
+
+ let songTitles = songs.filter((els) => {
+   return els.id == index;
+ });
+
+ // Song Title Fetching Functionality
+
+ songTitles.forEach((elss) => {
+   // let { songName , poster } = elss;
+   let { songName } = elss;
+
+   title.innerHTML = songName;
+   // poster_master_play.src = poster;
+
+   // Download Song Functionality
+   download_music.setAttribute("download", songName);
+ });
+
+ // Background Functionality
+ makeAllBackground();
+ Array.from(document.getElementsByClassName("songItem"))[
+   index - 1
+ ].style.background = "rgb(105 , 105 , 105 , .1)";
+ makeAllPlays();
+ el.target.classList.remove("bi-play-circle-fill");
+ el.target.classList.add("bi-pause-circle-fill");
+ wave.classList.add("active1");
+
     });
-
-    // Song Title Fetching Functionality
-
-    songTitles.forEach((elss) => {
-      // let { songName , poster } = elss;
-      let { songName } = elss;
-
-      title.innerHTML = songName;
-      // poster_master_play.src = poster;
-
-      // Download Song Functionality
-      download_music.setAttribute("download", songName);
-    });
-
-    // Background Functionality
-    makeAllBackground();
-    Array.from(document.getElementsByClassName("songItem"))[
-      index - 1
-    ].style.background = "rgb(105 , 105 , 105 , .1)";
-    makeAllPlays();
-    el.target.classList.remove("bi-play-circle-fill");
-    el.target.classList.add("bi-pause-circle-fill");
-    wave.classList.add("active1");
   });
 });
+
+// Update playlist buttons' state when music is paused/stopped
+music.addEventListener('pause', () => {
+  updatePlayPauseUI(false);
+  Array.from(document.getElementsByClassName("playListPlay")).forEach((btn) => {
+    btn.classList.remove("bi-pause-circle-fill");
+    btn.classList.add("bi-play-circle-fill");
+  });
+});
+
+
+
 
 // Add Start And End Time Seakbar Functionality
 music.addEventListener("timeupdate", () => {
