@@ -12,6 +12,8 @@ let masterPlay = document.getElementById("masterPlay");
 let wave = document.getElementById("wave");
 let poster_master_play = document.getElementById("poster_master_play");
 let title = document.getElementById("title");
+let download_music = document.getElementById("download_music");
+
 
 // Add Next & Back Button Functionality
 let back = document.getElementById("back");
@@ -319,6 +321,9 @@ Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
     masterPlay.classList.remove("bi-play-fill");
     masterPlay.classList.add("bi-pause-fill");
 
+    // Download Song Functionality
+    download_music.href = `audio/${index}.mp3`;
+
     //  Title Fetching
 
     let songTitles = songs.filter((els) => {
@@ -333,6 +338,9 @@ Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
 
       title.innerHTML = songName;
       // poster_master_play.src = poster;
+
+    // Download Song Functionality
+      download_music.setAttribute('download' , songName);
     });
 
     // Background Functionality
@@ -455,6 +463,7 @@ back.addEventListener("click", () => {
 
     title.innerHTML = songName;
     // poster_master_play.src = poster;
+    
   });
 
   // Background Functionality
@@ -511,4 +520,8 @@ next.addEventListener("click", () => {
   el.target.classList.add("bi-pause-circle-fill");
   wave.classList.add("active1");
 });
+
+
+// Shuffle Button Active Functionality
+
 
