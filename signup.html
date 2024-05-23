@@ -16,7 +16,7 @@
       <div class="left_bx1">
         <div class="content">
           <form method="post">
-            <h3>Login</h3>
+            <h3>Sign Up</h3>
             <div class="card">
               <label for="name">Name</label>
               <input
@@ -24,14 +24,36 @@
                 name="user_name"
                 placeholder="Enter Your Usename..."
                 required
-              />
+                />
             </div>
+
             <div class="card">
-              <label for="password">Password</label>
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  name="user_email"
+                  placeholder="Enter Your Email..."
+                  required
+                />
+              </div>
+
+              <div class="card">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  name="user_password"
+                  placeholder="Enter Your Password..."
+                  required
+                />
+              </div>
+
+
+            <div class="card">
+              <label for="re-password">Re-Password</label>
               <input
-                type="password"
-                name="user_password"
-                placeholder="Enter Your Password..."
+                type="re_password"
+                name="user_re_password"
+                placeholder="Enter Your Re-Password..."
                 required
               />
             </div>
@@ -39,7 +61,7 @@
             <div class="check">
               <input type="checkbox" name="" id=""><span>Remember Me.</span>
             </div>
-            <p>Don't have a account yet? <a href="signup.html">Sign Up</a></p>
+            <p>Don't have a account yet? <a href="login.html">Sign Up</a></p>
           </form>
         </div>
       </div>

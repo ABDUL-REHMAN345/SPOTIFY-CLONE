@@ -812,13 +812,14 @@ header .left_bx1,
 header .left_bx1 {
     width: 35%;
     background: #fff;
-    box-shadow: 5px 0px 2px #090f1f;
+    /* box-shadow: 5px 0px 2px #090f1f; */
 }
 
 header .left_bx1 .content {
     width: 75%;
     height: auto;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
+    border: none;
     padding: 25px 20px;
     background: #fff;
 }
@@ -874,4 +875,15 @@ header .left_bx1 .content p a {
     text-decoration: none;
     color: #5adae0;
     font-weight: bold;
+}
+
+header .right_bx1 h3{
+   position: absolute;
+   background: #5adae0;
+   color: #000;
+   right: 0;
+   bottom: 20px;
+   padding: 3px 10px;
+   border-radius: 5px 0px 0px 5px;
+   font-size: 13px;
 }
