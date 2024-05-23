@@ -13,7 +13,7 @@ let wave = document.getElementById("wave");
 let poster_master_play = document.getElementById("poster_master_play");
 let title = document.getElementById("title");
 let download_music = document.getElementById("download_music");
-
+let shuffle = document.getElementsByClassName("shuffle")[0];
 
 // Add Next & Back Button Functionality
 let back = document.getElementById("back");
@@ -58,8 +58,8 @@ const songs = [
   {
     id: 1,
     songName: `
-        On My Way <br />
-        <div class="subtitle">Alan Walker</div>`,
+        Badoo Badi <br />
+        <div class="subtitle">Chahat Fateh Ali Khan</div>`,
     poster: "img/1.jpg",
   },
   {
@@ -79,8 +79,8 @@ const songs = [
   {
     id: 4,
     songName: `
-        Tum He Ho <br />
-        <div class="subtitle">Atif Aslam</div>`,
+         On My Way <br />
+        <div class="subtitle">Alan Walker</div>`,
     poster: "img/4.jpg",
   },
   {
@@ -289,9 +289,10 @@ pop_art_left.addEventListener("click", () => {
   Artists_bx.scrollLeft -= 330;
 });
 
-// Fetch Poster Local Data
+// Fetch Poster Image and Poster Title in Local Data
 Array.from(document.getElementsByClassName("songItem")).forEach((e, i) => {
   e.getElementsByTagName("img")[0].src = songs[i].poster;
+  e.getElementsByTagName("h5")[0].innerHTML = songs[i].songName;
 });
 
 // Play Button Functionality
@@ -339,8 +340,8 @@ Array.from(document.getElementsByClassName("playListPlay")).forEach((e) => {
       title.innerHTML = songName;
       // poster_master_play.src = poster;
 
-    // Download Song Functionality
-      download_music.setAttribute('download' , songName);
+      // Download Song Functionality
+      download_music.setAttribute("download", songName);
     });
 
     // Background Functionality
@@ -463,7 +464,6 @@ back.addEventListener("click", () => {
 
     title.innerHTML = songName;
     // poster_master_play.src = poster;
-    
   });
 
   // Background Functionality
@@ -480,13 +480,10 @@ back.addEventListener("click", () => {
 // Next Button Functionality
 
 next.addEventListener("click", () => {
-  
   index++;
   if (index > Array.from(document.getElementsByClassName("songItem")).length) {
     index = 1;
   }
-
-
 
   music.src = `audio/${index}.mp3`;
   poster_master_play.src = `img/${index}.jpg`;
@@ -521,7 +518,190 @@ next.addEventListener("click", () => {
   wave.classList.add("active1");
 });
 
-
 // Shuffle Button Active Functionality
 
+shuffle.addEventListener("click", () => {
+  let a = shuffle.innerHTML;
 
+  switch (a) {
+    case "next":
+      shuffle.classList.add("bi-arrow-repeat");
+      shuffle.classList.remove("bi-music-note-beamed");
+      shuffle.classList.remove("bi-shuffle");
+      shuffle.innerHTML = "repeat";
+      break;
+
+    case "repeat":
+      shuffle.classList.remove("bi-arrow-repeat");
+      shuffle.classList.remove("bi-music-note-beamed");
+      shuffle.classList.add("bi-shuffle");
+      shuffle.innerHTML = "random";
+      break;
+
+    case "random":
+      shuffle.classList.remove("bi-arrow-repeat");
+      shuffle.classList.add("bi-music-note-beamed");
+      shuffle.classList.remove("bi-shuffle");
+      shuffle.innerHTML = "next";
+      break;
+  }
+});
+
+//  Shuffle Next Button Functionality Add
+
+const next_music = () => {
+  if (index == songs.length) {
+    index = 1;
+  } else {
+    index++;
+  }
+  music.src = `audio/${index}.mp3`;
+  poster_master_play.src = `img/${index}.jpg`;
+  music.play();
+  masterPlay.classList.remove("bi-play-fill");
+  masterPlay.classList.add("bi-pause-fill");
+
+  // Download Song Functionality
+  download_music.href = `audio/${index}.mp3`;
+
+  //  Title Fetching
+
+  let songTitles = songs.filter((els) => {
+    return els.id == index;
+  });
+
+  // Song Title Fetching Functionality
+
+  songTitles.forEach((elss) => {
+    // let { songName , poster } = elss;
+    let { songName } = elss;
+
+    title.innerHTML = songName;
+    // poster_master_play.src = poster;
+
+    // Download Song Functionality
+    download_music.setAttribute("download", songName);
+  });
+
+  // Background Functionality
+  makeAllBackground();
+  Array.from(document.getElementsByClassName("songItem"))[
+    index - 1
+  ].style.background = "rgb(105 , 105 , 105 , .1)";
+  makeAllPlays();
+  el.target.classList.remove("bi-play-circle-fill");
+  el.target.classList.add("bi-pause-circle-fill");
+  wave.classList.add("active1");
+  wave.classList.add("active1");
+};
+
+//  Music Repeat Button Functionality
+const repeat_music = () => {
+  index;
+  music.src = `audio/${index}.mp3`;
+  poster_master_play.src = `img/${index}.jpg`;
+  music.play();
+  masterPlay.classList.remove("bi-play-fill");
+  masterPlay.classList.add("bi-pause-fill");
+
+  // Download Song Functionality
+  download_music.href = `audio/${index}.mp3`;
+
+  //  Title Fetching
+
+  let songTitles = songs.filter((els) => {
+    return els.id == index;
+  });
+
+  // Song Title Fetching Functionality
+
+  songTitles.forEach((elss) => {
+    // let { songName , poster } = elss;
+    let { songName } = elss;
+
+    title.innerHTML = songName;
+    // poster_master_play.src = poster;
+
+    // Download Song Functionality
+    download_music.setAttribute("download", songName);
+  });
+
+  // Background Functionality
+  makeAllBackground();
+  Array.from(document.getElementsByClassName("songItem"))[
+    index - 1
+  ].style.background = "rgb(105 , 105 , 105 , .1)";
+  makeAllPlays();
+  el.target.classList.remove("bi-play-circle-fill");
+  el.target.classList.add("bi-pause-circle-fill");
+  wave.classList.add("active1");
+  wave.classList.add("active1");
+};
+
+// Random Button Music functionality
+
+const random_music = () => {
+  if (index == songs.length) {
+    index = 1;
+  } else {
+    index = Math.floor(Math.random() * songs.length + 1);
+  }
+  music.src = `audio/${index}.mp3`;
+  poster_master_play.src = `img/${index}.jpg`;
+  music.play();
+  masterPlay.classList.remove("bi-play-fill");
+  masterPlay.classList.add("bi-pause-fill");
+
+  // Download Song Functionality
+  download_music.href = `audio/${index}.mp3`;
+
+  //  Title Fetching
+
+  let songTitles = songs.filter((els) => {
+    return els.id == index;
+  });
+
+  // Song Title Fetching Functionality
+
+  songTitles.forEach((elss) => {
+    // let { songName , poster } = elss;
+    let { songName } = elss;
+
+    title.innerHTML = songName;
+    // poster_master_play.src = poster;
+
+    // Download Song Functionality
+    download_music.setAttribute("download", songName);
+  });
+
+  // Background Functionality
+  makeAllBackground();
+  Array.from(document.getElementsByClassName("songItem"))[
+    index - 1
+  ].style.background = "rgb(105 , 105 , 105 , .1)";
+  makeAllPlays();
+  el.target.classList.remove("bi-play-circle-fill");
+  el.target.classList.add("bi-pause-circle-fill");
+  wave.classList.add("active1");
+  wave.classList.add("active1");
+};
+
+// Music Ended Functionality
+
+music.addEventListener("ended", () => {
+  let b = shuffle.innerHTML;
+
+  switch (b) {
+    case "repeat":
+      repeat_music();
+      break;
+
+    case "next":
+      next_music();
+      break;
+
+    case "random":
+      random_music();
+      break;
+  }
+});
