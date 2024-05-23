@@ -1,3 +1,30 @@
+<?php
+session_start();
+
+include('db_connect.php');
+$msg = false;
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $user_name = $_POST['user_name'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
+    $user_re_password = $_POST['user_re_password'];
+
+    if(!empty($user_name) && !empty($user_email) && !empty($user_password) && !is_numeric($user_name)){
+        if($user_password === $user_re_password){
+            $query = "INSERT INTO user (user, email, password) VALUES ('$user_name', '$user_email', '$user_password')";
+            mysqli_query($con, $query);
+            header("Location: index.php");
+            exit;
+        } else {
+            $msg = "Password Not Match";
+        }
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,13 +88,19 @@
             <div class="check">
               <input type="checkbox" name="" id=""><span>Remember Me.</span>
             </div>
-            <p>You have a account? <a href="login.html">Login</a></p>
+            <p>You have an account? <a href="index.php">Login</a></p>
           </form>
         </div>
       </div>
       <div class="right_bx1">
-        <img src="home.jpg" alt="Home Image">
-        <h3>Incorrect Password</h3>
+        <img src="home1.png" alt="Home Image">
+        <!-- <h3>Incorrect Password</h3> -->
+        <?php 
+    if ($msg) {
+        echo ('<h3>' .$msg. '</h3>');
+    }
+    ?>
+
       </div>
     </header>
   </body>
