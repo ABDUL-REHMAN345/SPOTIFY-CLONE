@@ -523,7 +523,7 @@
     let song_side = document.getElementsByClassName('song_side')[0];
 
     song_side.addEventListener('click', () => {
-      menu_side.style.transform = "translateX(-100%)";
+      // menu_side.style.transform = "translateX(-100%)";
       menu_list_active_button.style.opacity = 1;
     });
 

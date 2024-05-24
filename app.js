@@ -693,7 +693,6 @@ const next_music = () => {
   el.target.classList.remove("bi-play-circle-fill");
   el.target.classList.add("bi-pause-circle-fill");
   wave.classList.add("active1");
-  wave.classList.add("active1");
 };
 
 //  Music Repeat Button Functionality
