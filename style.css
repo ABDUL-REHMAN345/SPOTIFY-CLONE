@@ -72,6 +72,11 @@ header .menu_side .playlist h4 {
     transition: .3s linear;
 }
 
+header .menu_side h6 {
+    display: none;
+}
+
+
 
 header .menu_side .playlist h4:hover {
     color: #fff;

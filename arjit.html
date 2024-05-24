@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="spotify.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="arijit_media.css" />
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
@@ -27,6 +29,7 @@
   <body>
     <header>
       <div class="menu_side">
+        <h6 id="menu_list_active_button"><i class="bi bi-music-note-list"></i></h6>
         <h1>Playlist</h1>
         <div class="playlist">
           <h4 class="active">
@@ -512,5 +515,26 @@
       </div>
     </header>
     <script src="arijit.js"></script>
+    <script>
+      // Menubar Button Functionality
+      let menu_list_active_button = document.getElementById('menu_list_active_button');
+      // Menubar Box Target
+      let menu_side = document.getElementsByClassName('menu_side')[0];
+  
+      // Menubar Button Functionality when user click the button the menu_side open...
+      menu_list_active_button.addEventListener('click', () => {
+        menu_side.style.transform = "unset";
+        menu_list_active_button.style.opacity = 0;
+      })
+      // When user click the any side of the screen the menu_side close...
+      let song_side = document.getElementsByClassName('song_side')[0];
+  
+      song_side.addEventListener('click', () => {
+        menu_side.style.transform = "translateX(-100%)";
+        menu_list_active_button.style.opacity = 1;
+      });
+  
+  
+    </script>
   </body>
 </html>

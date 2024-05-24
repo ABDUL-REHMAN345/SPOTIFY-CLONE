@@ -1,41 +1,7 @@
 @media only screen and (max-width: 1300px) {
-    header {
-        width: 98%;
-        transition: .5s linear;
+    header .song_side .popular_song {
+        margin-top: -1px;
     }
-
-    header .menu_side,
-    .song_side {
-        width: 34%;
-    }
-
-    header .song_side {
-        width: 66%;
-    }
-
-    header .song_side .content {
-        height: 20%;
-    }
-
-    header .song_side::before {
-        margin-left: 140px;
-    }
-    header .menu_side h6 {
-        position: absolute;
-        right: -40px;
-        bottom: 10px;
-        width: 40px;
-        height: 40px;
-        background: #111727;
-        border-radius: 0px 10px 10px 0px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        cursor: pointer;
-        transition: 1s linear;
-    }
-
 }
 
 
@@ -180,8 +146,8 @@
     header .master_play .wave {
         right: 45%;
     }
+
     header .menu_side {
         width: 79%;
     }
 }
-
