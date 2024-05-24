@@ -16,6 +16,10 @@ let title = document.getElementById("title");
 let download_music = document.getElementById("download_music");
 let shuffle = document.getElementsByClassName("shuffle")[0];
 
+
+
+
+
 // Filter Song Functionality Add
 let input = document.getElementsByTagName("input")[0];
 
@@ -850,3 +854,5 @@ input.addEventListener("keyup", () => {
   }
  
 });
+
+
